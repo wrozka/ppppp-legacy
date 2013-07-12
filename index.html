@@ -80,10 +80,41 @@
 
         <section>
           <p>Start with naming the conditions</p>
+           <pre><code class="ruby" data-trim contenteditable>
+if roll % 2 != 0
+  @won = true
+end
+          </code></pre>
+
+           <pre><code class="ruby" data-trim contenteditable>
+odd = roll % 2 != 0
+if odd
+  @won = true
+end
+          </code></pre>
         </section>
 
         <section>
           <p>Extract methods</p>
+           <pre><code class="ruby" data-trim contenteditable>
+50.times do |i|
+  @pop_questions.push "Pop Question #{i}"
+  @science_questions.push "Science Question #{i}"
+  @sports_questions.push "Sports Question #{i}"
+end
+          </code></pre>
+
+           <pre><code class="ruby" data-trim contenteditable>
+def create_question(category, number)
+  "#{category} Question #{number}"
+end
+
+50.times do |i|
+  @pop_questions.push create_question("Pop", i)
+  @science_questions.push create_question("Science", i)
+  @sports_questions.push create_question("Sports", i)
+end
+          </code></pre>
         </section>
 
         <section>
@@ -93,16 +124,38 @@
         <section>
           <p>Similar prefixes?</p>
           <p>Probably an object</p>
+           <pre><code class="ruby" data-trim contenteditable>
+puts "#{current_player_name} has #{current_player_purse} coins"
+          </code></pre>
+
+           <pre><code class="ruby" data-trim contenteditable>
+class Player < Struct.new(:name, :purse)
+end
+puts "#{current_player.name} has #{current_player.purse} coins"
+          </code></pre>
         </section>
 
         <section>
           <p>Similar lists of arguments?</p>
           <p>Probably an object</p>
+           <pre><code class="ruby" data-trim contenteditable>
+def is_winning?(purse, place)
+def score(purse, place)
+def has_won(name, purse, place)
+          </code></pre>
+
+           <pre><code class="ruby" data-trim contenteditable>
+class Player < Struct.new(:name, :purse, :place)
+
+def is_winning?(player)
+def score(player)
+def has_won(player)
+          </code></pre>
         </section>
 
         <section>
           <p>Avoid nightmare of integration</p>
-          <p>Don't create a branch</p>
+          <p>Don't create feature branch</p>
         </section>
 
         <section>
